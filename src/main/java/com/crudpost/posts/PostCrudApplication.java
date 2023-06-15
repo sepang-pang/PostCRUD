@@ -1,4 +1,4 @@
-package com.crudpost.postcrud;
+package com.crudpost.posts;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
