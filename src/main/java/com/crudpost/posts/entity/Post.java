@@ -17,4 +17,9 @@ public class Post {
         this.userName = postRequestDto.getUserName();
         this.contents = postRequestDto.getContents();
     }
+
+    public void update(PostRequestDto postRequestDto) {
+        this.userName = postRequestDto.getUserName();
+        this.contents = postRequestDto.getContents();
+    }
 }
