@@ -10,9 +10,12 @@ public class PostResponseDto {
     private String userName;
     private String contents;
 
+
+
     public PostResponseDto(Post post) {
-        this.userId = post.getUserId();
+
         this.userName = post.getUserName();
         this.contents = post.getContents();
+        this.userId = post.getUserId();
     }
 }

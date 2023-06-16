@@ -1,5 +1,6 @@
 package com.crudpost.posts.Controller;
 
+import com.crudpost.posts.Dto.PostBooleanDto;
 import com.crudpost.posts.Dto.PostResponseDto;
 import com.crudpost.posts.Dto.PostRequestDto;
 import com.crudpost.posts.entity.Post;
@@ -52,19 +53,34 @@ public class PostController {
         // 해당 메모 존재하는지 확인
         if (postList.containsKey(id)) {
             Post post = postList.get(id);
-            post.update(postRequestDto);
-            return post.getUserId();
+            // 패스워드 확인
+            if (post.getPassword().equals(postRequestDto.getPassword())) {
+                post.update(postRequestDto);
+                return post.getUserId();
+
+            } else {
+                throw new IllegalArgumentException("선택한 메모는 존재하지 않습니다.");
+            }
+
         } else {
             throw new IllegalArgumentException("선택한 메모는 존재하지 않습니다.");
         }
+
     }
 
     @DeleteMapping("/post/{id}")
-    private Long deletePost(@PathVariable Long id, @RequestBody PostRequestDto postRequestDto) {
+    private PostBooleanDto postBooleanDto (@PathVariable Long id, @RequestBody PostRequestDto postRequestDto) {
         // 해당 메모가 있는지 확인
         if (postList.containsKey(id)) {
+
+            // password 확인
+            if (postList.get(id).getPassword().equals(postRequestDto.getPassword())){
             postList.remove(id);
-            return id;
+            return new PostBooleanDto(true);
+
+            } else {
+                throw new IllegalArgumentException("선택한 메모는 존재하지 않습니다.");
+            }
         } else {
             throw new IllegalArgumentException("선택한 메모는 존재하지 않습니다.");
         }
